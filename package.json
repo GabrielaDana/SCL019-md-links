@@ -3,5 +3,30 @@
   "version": "0.1.0",
   "engines": {
     "node": ">=14.x"
+  },
+  "description": "## Índice",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GabrielaDana/SCL019-md-links.git"
+  },
+  "author": "Gabriela Pacheco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GabrielaDana/SCL019-md-links/issues"
+  },
+  "homepage": "https://github.com/GabrielaDana/SCL019-md-links#readme",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "file-system": "^1.2.2"
   }
 }
