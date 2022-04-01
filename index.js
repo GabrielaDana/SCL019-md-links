@@ -28,5 +28,6 @@ readLine.question(colors.brightCyan('Ingresa una ruta: '), (ruta) =>{
   let archivo = fs.readFileSync(ruta, 'UTF-8');
   console.log(colors.bgCyan('El archivo contiene.....'));
   console.log(colors.bgMagenta(archivo))
+  
   readLine.close();
 });
