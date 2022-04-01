@@ -24,4 +24,9 @@ readLine.question(colors.brightCyan('Ingresa una ruta: '), (ruta) =>{
   //retorna true si la ruta es .md
   let isExtNameMd = () =>  path.extname(ruta) === '.md';
   console.log(colors.brightCyan(isExtNameMd()));
+
+  let archivo = fs.readFileSync(ruta, 'UTF-8');
+  console.log(colors.bgCyan('El archivo contiene.....'));
+  console.log(colors.bgMagenta(archivo))
+  readLine.close();
 });
