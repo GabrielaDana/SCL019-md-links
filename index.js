@@ -2,70 +2,72 @@
 //   // ...
 // };
 const colors = require('colors');
-const app = require('./app.js');
+const app = require('./app2.js');
 
 const isPathAbsolute = app.isPathAbsolute;
 const toAbsolute = app.toAbsolute;
 const isExtNameMd = app.isExtNameMd;
 const fileContent = app.fileContent;
+const regTextLink = app.regTextLink;
+const regLink = app.regLink;
+const httpValidate = app.httpValidate;
 
 const readLine = require('readline').createInterface({
-  input: process.stdin,
-  output: process.stdout
+    input: process.stdin,
+    output: process.stdout
 });
 
 readLine.question(colors.bgGrey(colors.brightCyan('Ingresa la ruta del archivo: ')), (route) => {
-  //Convierte a ruta absoluta la ruta relativa
-  isPathAbsolute(route) ? route : route = toAbsolute(route);
-  //Revisa si el archivo es .md y lo lee con file(), retorna un array de string con el contenido
-  if (isExtNameMd(route)) {
-    let texts = fileContent(route);
-    arrayText = texts.split('\n');
-  }
-  else {
-    process.stdin.write(colors.red('tu archivo no es .md \n'));
-    readLine.close();
-  };
-   //Expresiones regulares:
-   //Separa la línea que contiene el link + el texto
-    const regTextLink = new RegExp(/\[[\S\s]+\]\((https?:\/\/)?[\w\-]+(\.[\w\-]+)+[/#?]?.*\)/gm);
-   //Separa solo el link
-    const regLink = new RegExp(/(https?:\/\/)?[\w\-]+(\.[\w\-]+)+[/#?]?.*/gm);
-   //Separa solo el texto
-    const regText = new RegExp(/\[[\S\s]+\]/gm);
-  
-   //Arreglo para almacenar las líneas que contienen links+texto
-    let arrayLinks = [];
-   //Revisa si existen líneas con links y los guarda en arraylinks
-    arrayText.forEach(text => {
-      if (regTextLink.test(text)){
-        text.toString();
-        let links = text.match(regTextLink);
-        arrayLinks.push(links.toString())
-      }
-    });
-    //Arrego para almacenar los objetos con las claves href, text, file y status
-    let arrayObjects = [];
-    //Recorre el arreglo de link + texto y los separa para enviarlos a la clave correspondiente
-    //El resultado lo envía a arrayObjects
-    arrayLinks.forEach(link =>{
-        let href = link.match(regLink);
-        href = href.toString().slice(0,-1);
 
-        let textOfLink = link.match(regText);
-        textOfLink = textOfLink.toString().slice(1,-1).substr(0,50);
-
-        let objectLinks = {
-          href: href,
-          text: textOfLink,
-          file: route,
-          status: ""
+    isPathAbsolute(route) ? route : route = toAbsolute(route);
+    let arrayObjects = new Array();
+    if (isExtNameMd(route)) {
+        const texts = fileContent(route);
+        while ((arrayText = regTextLink.exec(texts)) !== null) {
+            let objectLinks = new Object();
+            objectLinks.href = arrayText[2];
+            objectLinks.text = arrayText[1].substr(0,50);
+            objectLinks.file = route;
+            arrayObjects.push(objectLinks)
         };
-        arrayObjects.push(objectLinks);
-    });
-    console.log(arrayObjects)
+        // while ((arrayText = regTextLink.exec(texts)) === null && (arrayOnlyLink = regLink.exec(texts)) !== null){
+        //     console.log(regTextLink.test(texts));
+        //     let objectLinks = new Object();
+        //     objectLinks.href = arrayOnlyLink[0];
+        //     objectLinks.text = '';
+        //     objectLinks.file = route;
+        //     arrayObjects.push(objectLinks)
+        // };
+        // console.log(arrayObjects, arrayObjects.length);
+    }
+    else {
+        process.stdin.write(colors.red('tu archivo no es .md \n'));
+        readLine.close();
+    };
 
-  readLine.close();
+      let arrayStatus = new Array();
+      arrayObjects.forEach(object =>{
+        let href = object.href
+        httpValidate(href).then((statusCode)=>{
+          if (statusCode >= 400){
+            object.status = 'fail';
+          }
+          if (statusCode === 'error 0000'){
+            object.status = '----->revisar<-----'
+          }
+          else {
+            object.status = 'ok';
+          }
+          return object
+        }).then((object)=>{
+          arrayStatus.push(object);
+        })
+      })
+      setTimeout(function(){
+        console.log(arrayStatus, arrayStatus.length);
+      }, 3000);
+
+    readLine.close();
 });
 
 // throw new TypeError(console.log('No puede ingresar una carpeta'));
