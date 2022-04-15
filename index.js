@@ -2,7 +2,7 @@
 //   // ...
 // };
 const colors = require('colors');
-const app = require('./app2.js');
+const app = require('./app.js');
 
 const isPathAbsolute = app.isPathAbsolute;
 const toAbsolute = app.toAbsolute;

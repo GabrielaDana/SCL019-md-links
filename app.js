@@ -1,73 +1,78 @@
-// module.exports = () => {
-//   // ...
-// };
-const colors = require('colors');
-const app = require('./app2.js');
+const fs = require('fs');
+const path = require('path');
+const https = require('https');
+const url = require('url');
 
-const isPathAbsolute = app.isPathAbsolute;
-const toAbsolute = app.toAbsolute;
-const isExtNameMd = app.isExtNameMd;
-const fileContent = app.fileContent;
-const regTextLink = app.regTextLink;
-const regLink = app.regLink;
-const httpValidate = app.httpValidate;
+//Devuelve true si la ruta es absoluta
+const isPathAbsolute = (param) => path.isAbsolute(param);
 
-const readLine = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+//Transforma la ruta relativa a absoluta
+const toAbsolute = (param) => path.resolve(param);
 
-readLine.question(colors.bgGrey(colors.brightCyan('Ingresa la ruta del archivo: ')), (route) => {
+//Retorna true si la route es .md
+const isExtNameMd = (param) =>  path.extname(param) === '.md';
 
-    isPathAbsolute(route) ? route : route = toAbsolute(route);
-    let arrayObjects = new Array();
-    if (isExtNameMd(route)) {
-        const texts = fileContent(route);
-        while ((arrayText = regTextLink.exec(texts)) !== null) {
-            let objectLinks = new Object();
-            objectLinks.href = arrayText[2];
-            objectLinks.text = arrayText[1].substr(0,50);
-            objectLinks.file = route;
-            arrayObjects.push(objectLinks)
-        };
-        // while ((arrayText = regTextLink.exec(texts)) === null && (arrayOnlyLink = regLink.exec(texts)) !== null){
-        //     console.log(regTextLink.test(texts));
-        //     let objectLinks = new Object();
-        //     objectLinks.href = arrayOnlyLink[0];
-        //     objectLinks.text = '';
-        //     objectLinks.file = route;
-        //     arrayObjects.push(objectLinks)
-        // };
-        // console.log(arrayObjects, arrayObjects.length);
-    }
-    else {
-        process.stdin.write(colors.red('tu archivo no es .md \n'));
-        readLine.close();
+//Lee el archivo
+const fileContent = (param) => fs.readFileSync(param, 'UTF-8');
+
+const regTextLink = new RegExp(/\[(.+)\]\s?\((https?:\/\/?[\w\-]+\.[\w\-]+[/#?]?[^\)]*)\)/gm);
+const regLink = new RegExp(/(https?:\/\/)?[\w\-]+(\.[\w\-]+)+[/#?]?[^\)]*/gm);
+
+const httpValidate = (param) =>{
+    return new Promise((resolve) => {
+    const options = {
+        method: 'HEAD',
+        host: url.parse(param).host,
+        port: 443,
+        path: url.parse(param).pathname,
     };
 
-      let arrayStatus = new Array();
-      arrayObjects.forEach(object =>{
-        let href = object.href
-        httpValidate(href).then((statusCode)=>{
-          if (statusCode >= 400){
-            object.status = 'fail';
-          }
-          if (statusCode === 'error 0000'){
-            object.status = '----->revisar<-----'
-          }
-          else {
-            object.status = 'ok';
-          }
-          return object
-        }).then((object)=>{
-          arrayStatus.push(object);
+      const req = https.request(options, res => {
+        let statusCode = res.statusCode
+        resolve(statusCode);
+        res.on('data', d => {
+          process.stdout.write(d)
         })
       })
-      setTimeout(function(){
-        console.log(arrayStatus, arrayStatus.length);
-      }, 3000);
+      req.on('error', error => {
+        resolve('error 0000')
+      })
+      req.end()
+    })
+};
 
-    readLine.close();
-});
 
-// throw new TypeError(console.log('No puede ingresar una carpeta'));
+module.exports = {
+    isPathAbsolute,
+    toAbsolute,
+    isExtNameMd,
+    fileContent,
+    httpValidate,
+    regTextLink,
+    regLink
+}
+
+// const RegExr = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s\n]+)(?=\))/g
+// const returnFileUrls = (file) => {
+//   fs.readFile(file, "utf-8", (err, file) => {
+//     const stringLinks = file.match(RegExr);
+//     const newArray = Array.from(stringLinks);
+//     if (err) {
+//       console.log(err);
+//     }
+//     else {
+//       console.log(newArray)
+//     }
+//   });
+// }
+
+// (https?:\/\/)?[\w\-]+(\.[\w\-]+)+[/#?]?[^\)]*
+
+// [asdsd ññ](http://algo.com/2/3/asasdasddsaadsdas$%&/) Link a alg',
+
+// aa[feibu](www.facebook.com)asdasdsss
+
+// [mentira]
+// (https://miwebkasjd.cl)asdasd
+
+// https://www.google.com
