@@ -1,7 +1,6 @@
 // module.exports = () => {
 //   // ...
 // };
-const colors = require('colors');
 const app = require('./app.js');
 
 const isPathAbsolute = app.isPathAbsolute;
@@ -27,6 +26,10 @@ const mdLinks = (route, opt) => {
           arrayObjects.push(objectLinks)
           // arrayText.pop(texts)
         };
+
+        if (regTextLink.exec(texts) === null){
+          reject ('No hay links en tu archivo .md')
+        }
      
       // while ((arrayOnlyLink = regLink.exec(texts)) !== null ){ //||(arrayText = regTextLink.exec(texts))){
         
