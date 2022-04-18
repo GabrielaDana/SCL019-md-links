@@ -3,7 +3,6 @@ const index = require('./index.js');
 const colors = require('colors');
 const mdLinks = index.mdLinks
 
-
 let path = process.argv[2]
 let option = '';
 

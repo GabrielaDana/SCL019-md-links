@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const url = require('url');
-const { argv } = require('process');
+const colors = require('colors')
 
 //Devuelve true si la ruta es absoluta
 const isPathAbsolute = (param) => path.isAbsolute(param);
@@ -82,19 +82,19 @@ const options = (array, opt) =>{
   });
 
   if(opt === 'stats validate'){
-    console.log('Total: ', array.length);
-    console.log('Unique: ', (array.length - duplicated.length));
-    console.log('Broken: ', fail.length);
+    console.log(colors.brightCyan('Total: ',colors.magenta( array.length)));
+    console.log(colors.brightCyan('Unique: ', colors.magenta(array.length - duplicated.length)));
+    console.log(colors.brightCyan('Broken: ', colors.magenta(fail.length)));
   }
 
   else if (opt === 'stats'){
-    console.log('Total: ', array.length);
-    console.log('Unique: ', (array.length - duplicated.length));
+    console.log(colors.brightCyan('Total: ',colors.magenta( array.length)));
+    console.log(colors.brightCyan('Unique: ', colors.magenta(array.length - duplicated.length)));
   }
   else if (opt === 'validate'){
-    console.log('Links encontrados en tu archivo .md', array);
+    console.log(colors.brightCyan('Links encontrados en tu archivo .md', colors.magenta(array)));
   }
-  else console.log('Ingresa una opción o ambas: "--stats", "--validate"');
+  else console.log(colors.brightMagenta('Ingresa una opción o ambas:', colors.brightCyan('"--stats", "--validate"')));
 }
 
 module.exports = {

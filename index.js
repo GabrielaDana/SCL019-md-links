@@ -24,7 +24,6 @@ const mdLinks = (route, opt) => {
           objectLinks.text = arrayText[1].substr(0, 50);
           objectLinks.file = route;
           arrayObjects.push(objectLinks)
-          // arrayText.pop(texts)
         };
 
         if (regTextLink.exec(texts) === null){
