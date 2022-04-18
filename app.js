@@ -30,12 +30,10 @@ const httpValidate = (param) =>{
       const req = https.request(options, res => {
         let statusCode = res.statusCode
         resolve(statusCode);
-        res.on('data', d => {
-          process.stdout.write(d)
-        })
       })
       req.on('error', error => {
-        resolve('error 0000')
+        // console.log(error);
+        resolve('???')
       })
       req.end()
     })
