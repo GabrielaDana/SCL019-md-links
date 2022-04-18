@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const url = require('url');
+const { argv } = require('process');
 
 //Devuelve true si la ruta es absoluta
 const isPathAbsolute = (param) => path.isAbsolute(param);
@@ -16,7 +17,7 @@ const isExtNameMd = (param) =>  path.extname(param) === '.md';
 const fileContent = (param) => fs.readFileSync(param, 'UTF-8');
 
 const regTextLink = new RegExp(/\[(.+)\]\s?\((https?:\/\/?[\w\-]+\.[\w\-]+[/#?]?[^\)]*)\)/gm);
-const regLink = new RegExp(/(https?:\/\/)?[\w\-]+(\.[\w\-]+)+[/#?]?[^\)]*/gm);
+const regLink = new RegExp(/(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm);
 
 const httpValidate = (param) =>{
     return new Promise((resolve) => {
@@ -33,12 +34,68 @@ const httpValidate = (param) =>{
       })
       req.on('error', error => {
         // console.log(error);
-        resolve('???')
+        resolve('ENOTFOUND')
       })
       req.end()
     })
 };
 
+const getLinks = (objects, stats) =>{
+  return new Promise((resolve) => {
+    objects.forEach((object) => {
+      let href = object.href
+      httpValidate(href).then((statusCode => {
+        if (statusCode >= 400) {
+          object.status = statusCode;
+          object.ok = 'fail';
+        }
+        else if (statusCode === 'ENOTFOUND') {
+          object.status = statusCode;
+          object.ok = 'fail';
+        }
+        else {
+          object.status = statusCode;
+          object.ok = 'ok';
+        }
+        return object
+      })).then((object) => {
+        stats.push(object);
+        if (objects.length === stats.length) {
+          resolve(stats)
+        }
+      }).catch(res => console.log(res))
+    });
+  })
+}
+
+
+const options = (array, opt) =>{
+  const fail = array.filter(function (object) {
+    return object.ok === 'fail';
+  })
+  const search = array.reduce((acc, link) => {
+    acc[link.href] = ++acc[link.href] || 0;
+    return acc;
+  }, {});
+  const duplicated = array.filter((link) => {
+    return search[link.href];
+  });
+
+  if(opt === 'stats validate'){
+    console.log('Total: ', array.length);
+    console.log('Unique: ', (array.length - duplicated.length));
+    console.log('Broken: ', fail.length);
+  }
+
+  else if (opt === 'stats'){
+    console.log('Total: ', array.length);
+    console.log('Unique: ', (array.length - duplicated.length));
+  }
+  else if (opt === 'validate'){
+    console.log('Links encontrados en tu archivo .md', array);
+  }
+  else console.log('Ingresa una opción o ambas: "--stats", "--validate"');
+}
 
 module.exports = {
     isPathAbsolute,
@@ -47,30 +104,8 @@ module.exports = {
     fileContent,
     httpValidate,
     regTextLink,
-    regLink
+    regLink,
+    getLinks,
+    options
 }
 
-// const RegExr = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s\n]+)(?=\))/g
-// const returnFileUrls = (file) => {
-//   fs.readFile(file, "utf-8", (err, file) => {
-//     const stringLinks = file.match(RegExr);
-//     const newArray = Array.from(stringLinks);
-//     if (err) {
-//       console.log(err);
-//     }
-//     else {
-//       console.log(newArray)
-//     }
-//   });
-// }
-
-// (https?:\/\/)?[\w\-]+(\.[\w\-]+)+[/#?]?[^\)]*
-
-// [asdsd ññ](http://algo.com/2/3/asasdasddsaadsdas$%&/) Link a alg',
-
-// aa[feibu](www.facebook.com)asdasdsss
-
-// [mentira]
-// (https://miwebkasjd.cl)asdasd
-
-// https://www.google.com
