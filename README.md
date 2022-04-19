@@ -71,11 +71,11 @@ Ejemplo:
     Unique: 3
     Broken: 1
 
-## Planificación del proyecto
+## 3. Planificación del proyecto
 
 ### Diagrama de flujo
 
- ![Diagrama](link de la imagen)
+ ![Diagrama](https://github.com/GabrielaDana/SCL019-md-links/blob/main/Diagrama_de_flujo.png)
  
 
 
