@@ -81,7 +81,7 @@ Ejemplo:
  
 ### Organización
 
-![backlog](url)
+![backlog](https://github.com/GabrielaDana/SCL019-md-links/blob/main/backlog.png)
  
 
 
