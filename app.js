@@ -4,6 +4,7 @@ const https = require('https');
 const url = require('url');
 const colors = require('colors')
 
+const exist = (param) => fs.existsSync(param)
 //Devuelve true si la ruta es absoluta
 const isPathAbsolute = (param) => path.isAbsolute(param);
 
@@ -92,10 +93,18 @@ const options = (array, opt) => {
   else if (opt === 'validate') {
     console.log(colors.brightCyan('Links encontrados en tu archivo .md', colors.magenta(array)));
   }
-  else console.log(colors.brightMagenta('Ingresa una opción o ambas:', colors.brightCyan('"--stats", "--validate"')));
+  else {
+    console.log(colors.brightMagenta('Ingresa una de las sigueintes opciones:'))
+    console.log(colors.brightCyan('--stats'))
+    console.log(colors.brightCyan('--validate'))
+    console.log(colors.brightCyan('--stats --validate'))
+  }
+    
+  
 }
 
 module.exports = {
+  exist,
   isPathAbsolute,
   toAbsolute,
   isExtNameMd,

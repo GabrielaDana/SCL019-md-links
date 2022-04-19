@@ -18,4 +18,4 @@ else if (argv.stats) {
 
 mdLinks(path, option)
     .then((res) => { res })
-    .catch((res)=> {console.log(colors.brightMagenta(res))})
+    .catch((resp)=> {console.log(colors.brightMagenta(resp))})
