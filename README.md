@@ -13,11 +13,11 @@ Herramienta creada utilizando Node.js, que lee y analiza archivos en formato Mar
 
 ### Instalación
 
-    npm i  gabrielaDana/md-links
+    npm i  GabrielaDana/md-links
 
 ### Uso de librería
 
-    const mdLinks = require('gabrielaDana/md-links');
+    const mdLinks = require('GabrielaDana/md-links');
 
 ### CLI (Interfaz de línea de comando)
 
