@@ -13,7 +13,7 @@ Herramienta creada utilizando Node.js, que lee y analiza archivos en formato Mar
 
 ### Instalación
 
-    npm i  GabrielaDana/md-links
+    npm i GabrielaDana/md-links
 
 ### Uso de librería
 
