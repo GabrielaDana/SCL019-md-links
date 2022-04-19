@@ -31,13 +31,15 @@ Ejemplo:
 
 #### Ruta o path
 
-Debes ingresar una ruta, que puede ser relativa o absoluta. Si es relativa recuerda incluir las carpetas:
+Debes ingresar una ruta, que puede ser relativa o absoluta. Si es relativa recuerda incluir las carpetas.
+
+Ejemplo:
 
     md-links carpeta1/carpeta2/archivo.md --validate
 
 #### Options:
 
-##### --validate
+##### Opción *--validate*
 
 Si ingresamos esta opción el módulo realiza una petición HTTP para averiguar si los links dentro del archivo funcionan o no. Si un link tienen un status menor a "400", por ejemplo "200", el link tendrá el mensaje "ok", en cambio si es mayor a "400" el mensaje será "fail".
 
@@ -50,7 +52,7 @@ Ejemplo:
     status: 302,
     ok: 'ok'
     
-##### --stats
+##### Opción *--stats*
 
 Si ingresamos la opción --stats el output (salida) será un texto con estadísticas básicas sobre los links. Cuántos links fueron encontrados (total) y cuantos son únicos (unique).
 
@@ -60,7 +62,7 @@ Ejemplo:
     Total: 5
     Unique: 3
     
-##### --stats --validate
+##### Opción *--stats --validate*
 
 Si ingresamos ambas opciones independiente del orden (*--stats --validate* o *--validate --stats*) obtendremos estadísticas que necesiten de los resultados de la validación, como los links quebrados (broken)
 
@@ -76,6 +78,10 @@ Ejemplo:
 ### Diagrama de flujo
 
  ![Diagrama](https://github.com/GabrielaDana/SCL019-md-links/blob/main/Diagrama_de_flujo.png)
+ 
+### Organización
+
+![backlog](url)
  
 
 
