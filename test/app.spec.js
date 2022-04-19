@@ -3,8 +3,8 @@ const app = require('../app.js');
 const isPathAbsolute = app.isPathAbsolute;
 const toAbsolute = app.toAbsolute;
 const isExtNameMd = app.isExtNameMd;
-const file = app.file;
-const resultado = app.resultado;
+const fileContent = app.fileContent;
+const options = app.options;
 
 describe('Function isPathAbsolute', () => {
     it('isPathAbsolute debe ser una función', () => {
@@ -55,14 +55,26 @@ describe('Function isExtNameMd', () => {
     });
 });
 
-describe('Function file', () => {
+describe('Function fileContent', () => {
     it('file debe ser una función', () => {
-        expect(typeof file).toBe('function');
+        expect(typeof fileContent).toBe('function');
     });
 
     it('file debe recibir un archivo y leerlo para acceder a su contenido', () => {
         const route = '/Users/gabriela/Desktop/<Laboratoria>/SCL019-md-links/test.md';
-        const result = file(route);
+        const result = fileContent(route);
         expect(result).toEqual('aquí está el contenido del archivo :B');
     });
 });
+
+describe('function options', () =>{
+    it ('options debe ser una función', () => {
+        expect(typeof options).toBe('function');
+    })
+
+    // it('options debe recibir una opción y devolver una respuesta válida' , () =>{
+    //     const opt = 'stats'
+    //     const array = []
+    //     const result = options(array, opt)
+    // })
+})
