@@ -37,13 +37,6 @@ const mdLinks = (path, option) => {
         }
     })
 }
-mdLinks('prueba.md', {validate: true})
-    .then((res) => {
-        console.log(res);
-    })
-    .catch((res) => {
-        console.log(res);
-    });
 
 module.exports = {
     mdLinks
