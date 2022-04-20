@@ -19,6 +19,22 @@ const fileContent = (param) => fs.readFileSync(param, 'UTF-8');
 
 const regTextLink = new RegExp(/\[(.+)\]\s?\((https?:\/\/?[\w\-]+\.[\w\-]+[/#?]?[^\)]*)\)/gm);
 
+const findLinks = (file, array, path) =>{
+  while ((arrayText = regTextLink.exec(file)) !== null) {
+    let objectLinks = new Object();
+    objectLinks.href = arrayText[2];
+    objectLinks.text = arrayText[1].substr(0, 50);
+    objectLinks.file = path;
+    array.push(objectLinks)
+  };
+  if (regTextLink.exec(file) === null) {
+    reject('No hay links en tu archivo .md')
+  }
+  else{
+    return array;
+  }
+}
+
 const httpValidate = (param) => {
   return new Promise((resolve) => {
     const options = {
@@ -110,7 +126,7 @@ module.exports = {
   isExtNameMd,
   fileContent,
   httpValidate,
-  regTextLink,
+  findLinks,
   getLinks,
   options
 }

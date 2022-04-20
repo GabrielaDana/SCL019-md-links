@@ -1,7 +1,7 @@
 const { argv } = require('yargs');
-const index = require('./index.js');
+const functions = require('./functions.js');
 const colors = require('colors');
-const mdLinks = index.mdLinks
+const mdLinks = functions.mdLinks
 
 let path = process.argv[2]
 let option = '';

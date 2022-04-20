@@ -4,7 +4,7 @@
   "engines": {
     "node": ">=14.x"
   },
-  "description": "## Índice",
+  "description": "Herramienta creada utilizando Node.js, que lee y analiza archivos en formato Markdown, para verificar los links que contengan y reportar estadísticas.",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -21,6 +21,7 @@
   "bugs": {
     "url": "https://github.com/GabrielaDana/SCL019-md-links/issues"
   },
+  
   "homepage": "https://github.com/GabrielaDana/SCL019-md-links#readme",
   "devDependencies": {
     "jest": "^27.5.1"
@@ -28,5 +29,11 @@
   "dependencies": {
     "colors": "^1.4.0",
     "file-system": "^1.2.2"
-  }
-}
+  },
+  "keywords": [
+    "md-links",
+    "Markdown",
+    "links",
+    "mdLinks"
+  ]
+} 
