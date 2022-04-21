@@ -21,14 +21,14 @@
   "bugs": {
     "url": "https://github.com/GabrielaDana/SCL019-md-links/issues"
   },
-  
   "homepage": "https://github.com/GabrielaDana/SCL019-md-links#readme",
   "devDependencies": {
     "jest": "^27.5.1"
   },
   "dependencies": {
     "colors": "^1.4.0",
-    "file-system": "^1.2.2"
+    "file-system": "^1.2.2",
+    "gd-md-links": "^0.1.0"
   },
   "keywords": [
     "md-links",
@@ -36,4 +36,4 @@
     "links",
     "mdLinks"
   ]
-} 
+}

@@ -1,5 +1,5 @@
 const app = require('./app.js');
-
+const { argv } = require('yargs');
 const exist = app.exist;
 const isPathAbsolute = app.isPathAbsolute;
 const toAbsolute = app.toAbsolute;
@@ -8,6 +8,19 @@ const fileContent = app.fileContent;
 const findLinks = app.findLinks;
 const getLinks = app.getLinks;
 const options = app.options;
+
+let path = process.argv[2]
+let option = '';
+
+if (argv.stats && argv.validate) {
+    option = 'stats validate';
+}
+else if (argv.validate) {
+    option = 'validate';
+}
+else if (argv.stats) {
+    option = 'stats';
+}
 
 
 const mdLinks = (route, opt) => {
@@ -34,7 +47,6 @@ const mdLinks = (route, opt) => {
   })
 }
 
-
-module.exports = {
-  mdLinks
-}
+mdLinks(path, option)
+    .then((res) => res)
+    .catch((resp)=> resp)

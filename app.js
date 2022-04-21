@@ -79,7 +79,7 @@ const getLinks = (objects, stats) => {
         if (objects.length === stats.length) {
           resolve(stats)
         }
-      }).catch(res => console.log(res))
+      }).catch(res => res)
     });
   })
 }
