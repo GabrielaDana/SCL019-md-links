@@ -17,7 +17,7 @@ Herramienta creada utilizando Node.js, que lee y analiza archivos en formato Mar
 
 ### Uso de librería
 
-    const mdLinks = require('gd-md-links');
+    const {mdLinks} = require('gd-md-links');
     
 Se utiliza mdLinks con los parámetros path (ruta del archivo) y opción (un objeto que contiene validate:true) para mostrar un arreglo de objetos con los links validados y su información:
 

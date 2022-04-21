@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const app = require('./functions.js');
 const { argv } = require('yargs');
 const exist = app.exist;
@@ -9,7 +11,7 @@ const findLinks = app.findLinks;
 const getLinks = app.getLinks;
 const options = app.options;
 
-let path = process.argv[1]
+let path = process.argv[2]
 let option = '';
 
 if (argv.stats && argv.validate) {
@@ -21,7 +23,7 @@ else if (argv.validate) {
 else if (argv.stats) {
     option = 'stats';
 }
-
+console.log(argv.stats);
 
 const mdLinks = (route, opt) => {
   return new Promise((resolve, reject) => {
@@ -49,4 +51,4 @@ const mdLinks = (route, opt) => {
 
 mdLinks(path, option)
     .then((res) => res)
-    .catch((resp)=> resp)
+    .catch((resp)=> console.log(resp))

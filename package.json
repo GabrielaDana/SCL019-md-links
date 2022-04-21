@@ -1,11 +1,17 @@
 {
   "name": "gd-md-links",
-  "version": "0.1.0",
+  "version": "0.1.6",
   "engines": {
     "node": ">=14.x"
   },
   "description": "Herramienta creada utilizando Node.js, que lee y analiza archivos en formato Markdown, para verificar los links que contengan y reportar estadísticas.",
-  "main": "index.js",
+  "main": "gd-md-links/index.js",
+  "bin": "gd-md-links/cli.js",
+  "files": [
+    "gd-md-links/index.js",
+    "gd-md-links/cli.js",
+    "gd-md-links/functions.js"
+  ],
   "directories": {
     "test": "test"
   },
@@ -28,7 +34,8 @@
   "dependencies": {
     "colors": "^1.4.0",
     "file-system": "^1.2.2",
-    "gd-md-links": "^0.1.0"
+    "gd-md-links": "^0.1.5",
+    "yargs": "^17.4.1"
   },
   "keywords": [
     "md-links",
