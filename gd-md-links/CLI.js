@@ -1,4 +1,4 @@
-const app = require('./app.js');
+const app = require('./functions.js');
 const { argv } = require('yargs');
 const exist = app.exist;
 const isPathAbsolute = app.isPathAbsolute;
