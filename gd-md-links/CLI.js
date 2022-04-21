@@ -9,7 +9,7 @@ const findLinks = app.findLinks;
 const getLinks = app.getLinks;
 const options = app.options;
 
-let path = process.argv[2]
+let path = process.argv[1]
 let option = '';
 
 if (argv.stats && argv.validate) {
