@@ -3,7 +3,7 @@ const functions = require('./functions.js');
 const colors = require('colors');
 const mdLinks = functions.mdLinks
 
-let path = process.argv[2]
+let path = process.argv[1]
 let option = '';
 
 if (argv.stats && argv.validate) {
