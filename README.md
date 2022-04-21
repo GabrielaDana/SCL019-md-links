@@ -13,11 +13,11 @@ Herramienta creada utilizando Node.js, que lee y analiza archivos en formato Mar
 
 ### Instalación
 
-    npm i GabrielaDana/md-links
+    npm i gd-md-links
 
 ### Uso de librería
 
-    const mdLinks = require('GabrielaDana/md-links');
+    const mdLinks = require('gd-md-links');
     
 Se utiliza mdLinks con los parámetros path (ruta del archivo) y opción (un objeto que contiene validate:true) para mostrar un arreglo de objetos con los links validados y su información:
 
@@ -35,11 +35,11 @@ Se utiliza mdLinks con el parametro path (ruta del archivo) para mostrar un arre
 
 se ejecuta a través del terminal:
 
-    $ md-links <path> [options]
+    $ gd-md-links <path> [options]
     
 Ejemplo:
 
-    $ md-links carpeta/archivo.md --stats
+    $ gd-md-links carpeta/archivo.md --stats
 
 #### Ruta o path
 
@@ -47,7 +47,7 @@ Debes ingresar una ruta, que puede ser relativa o absoluta. Si es relativa recue
 
 Ejemplo:
 
-    md-links carpeta1/carpeta2/archivo.md --validate
+    $ gd-md-links carpeta1/carpeta2/archivo.md --validate
 
 #### Options:
 
@@ -57,7 +57,7 @@ Si ingresamos esta opción el módulo realiza una petición HTTP para averiguar 
 
 Ejemplo:
 
-    $ md-links carpeta1/carpeta2/archivo.md --validate
+    $ gd-md-links carpeta1/carpeta2/archivo.md --validate
     href: 'https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/',
     text: 'Array - MDN',
     file: '/Users/user/Desktop/carpeta/SCL019-md-links/carpeta1/carpeta2/archivo.md',
@@ -70,7 +70,7 @@ Si ingresamos la opción --stats el output (salida) será un texto con estadíst
 
 Ejemplo:
 
-    $ md-links carpeta1/carpeta2/archivo.md --stats
+    $ gd-md-links carpeta1/carpeta2/archivo.md --stats
     Total: 5
     Unique: 3
     
@@ -80,7 +80,7 @@ Si ingresamos ambas opciones independiente del orden (*--stats --validate* o *--
 
 Ejemplo:
 
-    $ md-links carpeta1/carpeta2/archivo.md --stats --validate
+    $ gd-md-links carpeta1/carpeta2/archivo.md --stats --validate
     Total: 5
     Unique: 3
     Broken: 1
