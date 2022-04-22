@@ -1,6 +1,6 @@
 {
   "name": "gd-md-links",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "engines": {
     "node": ">=14.x"
   },
@@ -34,8 +34,7 @@
   "dependencies": {
     "colors": "^1.4.0",
     "file-system": "^1.2.2",
-    "gd-md-links": "^0.1.5",
-    "yargs": "^17.4.1"
+    "gd-md-links": "^0.1.5"
   },
   "keywords": [
     "md-links",

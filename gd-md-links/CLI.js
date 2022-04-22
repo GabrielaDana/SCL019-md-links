@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const app = require('./functions.js');
-const { argv } = require('yargs');
 const exist = app.exist;
 const isPathAbsolute = app.isPathAbsolute;
 const toAbsolute = app.toAbsolute;
@@ -11,19 +10,19 @@ const findLinks = app.findLinks;
 const getLinks = app.getLinks;
 const options = app.options;
 
-let path = process.argv[2]
+const proAr = process.argv
+let path = proAr[1]
 let option = '';
 
-if (argv.stats && argv.validate) {
+if ((proAr[2]==='--stats' && proAr[3]==='--validate')||((proAr[3]==='--stats' && proAr[2]==='--validate'))) {
     option = 'stats validate';
 }
-else if (argv.validate) {
+else if (proAr[2]==='--validate') {
     option = 'validate';
 }
-else if (argv.stats) {
+else if (proAr[2]==='--stats') {
     option = 'stats';
 }
-console.log(argv.stats);
 
 const mdLinks = (route, opt) => {
   return new Promise((resolve, reject) => {
