@@ -28,7 +28,7 @@ const findLinks = (file, array, path) =>{
     array.push(objectLinks)
   };
   if (regTextLink.exec(file) === null) {
-    reject('No hay links en tu archivo .md')
+    return null
   }
   else{
     return array;

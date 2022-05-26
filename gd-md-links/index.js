@@ -17,6 +17,10 @@ const mdLinks = (path, option) => {
             if (isExtNameMd(path)) {
                 let texts = fileContent(path);
                 if ((option?.validate)) {
+                    if(findLinks(texts, arrayObjects, path) === null){
+                        reject('No hay links en tu archivo .md')
+                    }
+                    else
                     findLinks(texts, arrayObjects, path)
                     let arrayStatus = new Array();
                     const links = getLinks(arrayObjects, arrayStatus);
@@ -25,7 +29,10 @@ const mdLinks = (path, option) => {
                     })
                 }
                 else{
-                    resolve(findLinks(texts, arrayObjects, path))
+                    if(findLinks(texts, arrayObjects, path)=== null){
+                        reject('No hay links en tu archivo .md')
+                    }
+                    else resolve(findLinks(texts, arrayObjects, path))
                 }
 
             } else {
