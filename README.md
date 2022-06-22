@@ -99,20 +99,5 @@ Ejemplo:
 ## 4. Package
 
 [Package en npmjs.com](https://www.npmjs.com/package/gd-md-links)
+
  
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
