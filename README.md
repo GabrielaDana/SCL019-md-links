@@ -4,6 +4,7 @@
 * [1. MdLinks](#1-MdLinks)
 * [2. Guía de uso](#2-Guía-de-uso)
 * [3. Planificación del proyecto](#3-planificación-del-proyecto)
+* [4. Package](#4-Package)
 
 ## 1. MdLinks 
 
@@ -94,6 +95,10 @@ Ejemplo:
 ### Organización
 
 ![backlog](https://github.com/GabrielaDana/SCL019-md-links/blob/main/backlog.png)
+
+## 4. Package
+
+[Package npmjs.com](https://www.npmjs.com/package/gd-md-links)
  
 
 
