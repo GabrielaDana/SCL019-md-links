@@ -98,7 +98,7 @@ Ejemplo:
 
 ## 4. Package
 
-[Package npmjs.com](https://www.npmjs.com/package/gd-md-links)
+[Package en npmjs.com](https://www.npmjs.com/package/gd-md-links)
  
 
 
